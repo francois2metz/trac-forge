@@ -1,0 +1,110 @@
+body 
+{
+	background-color:white;
+	color:black;
+	padding:0;
+	margin:0;
+}
+a 
+{
+	text-decoration: underline;
+}
+a:hover
+{
+	text-decoration:none;
+}
+h1 
+{
+	background-color:#FFCF43;
+	border-bottom:2px solid #FF9933;
+	font-size:2em;
+	margin:0;
+	padding: 10px;
+}
+#tri
+{
+	font-size: 0.7em;
+	color:gray;
+	position:absolute;
+	right: 5px;
+	margin:0;
+}
+#tri a
+{
+	color:gray;
+}
+.projects
+{
+	margin-top: 1em;
+}
+.projects .name a
+{
+	color: white;
+}
+.projects .details a
+{
+	color:black;
+}
+.projects li 
+{
+	background-color:#0066CC;
+	border:3px solid #003366;
+	clear:both;
+	list-style-type:none;
+	margin-bottom:5px;
+	margin-right: 5px;
+	padding:10px;
+}
+.projects li .name 
+{
+	color:white;
+	float:left;
+	width:30%;
+}
+.projects li .name > * 
+{
+	padding-left:8px;
+}
+.projects li .extra li 
+{
+	border:0 none;
+	margin:0;
+	padding:5px 5px 5px 20px;
+}
+.projects li .extra li.demo
+{
+	background: transparent url("../img/application.png") center left no-repeat;
+}
+.projects li .extra li.archive
+{
+       background: transparent url("../img/package.png") center left no-repeat;
+}
+
+.projects li .name h2 
+{
+	color:white;
+	font-size:1.2em;
+	margin:0;
+	padding:0;
+}
+.projects li .details 
+{
+	background-color:white;
+	border:2px solid #003366;
+	float:left;
+	padding:0 5px;
+}
+.clear 
+{
+	clear:both;
+}
+a img 
+{
+	margin-left: 5px;
+	border:0 none;
+}
+a:hover img 
+{
+	border-bottom: solid 4px #003366;
+}
+

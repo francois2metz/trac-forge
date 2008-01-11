@@ -1,0 +1,45 @@
+{% extends "base" %}
+{% marker "title" set "Admin" %}
+{% marker "h1" set "Administration" %}
+
+{% block "content" %}
+	<form method="post" action="">
+		<fieldset>
+			<legend>Ajouter un utilisateur</legend>
+			<label>Identifiant:</label> <input type="text" name="" id="" />
+			<br />
+			<label>Mot de passe:</label> <input type="password" name="" id="" />
+			<br />
+			<input type="submit" value="Ajouter" />
+		</fieldset>
+	</form>
+	<table>
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th colspan="2">Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for user in users %}
+			<tr>
+				<td>{{ user.name }}</td>
+				<td></td>
+				<td></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+	<h2>Projets</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+
+		</tbody>
+	</table>
+{% endblock %}

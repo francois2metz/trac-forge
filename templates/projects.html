@@ -1,0 +1,37 @@
+{% extends "base"  %}
+{% marker "title" set "Projets" %}
+{% marker "h1" set "Projets" %}
+
+{% block "content" %}
+	<p id="tri">Tri: 
+		{% if sort equals "a" %}<strong title="Tri par ordre alphabetique">a..z</strong>{% else %}<a href="a" title="Trier par ordre alphabetique">a..z</a>{% endif  %} | 
+	       	{% if sort equals "z" %}<strong title="Tri par ordre alphabetique inverse">z..a</strong>{% else %}<a href="z" title="Trier par ordre alphabetique inverse">z..a</a>{% endif %} | 
+	       	{% if sort equals "b" %}<strong title="Tri par activite">Activite</strong>{% else %}<a href="." title="Tri par activite dans le projet">Activite</a>{% endif %}
+	</p>
+	<ul class="projects">
+	{% for item in projects%}
+		<li>
+			<div class="name">
+				<h2><a href="{{ item.href }}/" title="Projet {{ item.name }}">{{ item.name }}</a></h2>
+				<p>{{ item.description  }}</p>
+				<ul class="extra">
+				{% if item.demo.enable %}
+					<li class="demo"><a href="{{ item.demo.href }}/">Demo</a></li>
+				{% endif %}
+				{% if item.tarball.enable %}
+					<li class="archive"><a href="{{ item.tarball.href }}/">Tarballs</a></li>
+				{% endif %}
+			        </ul>
+			</div>
+			<div class="details">
+				<p>Derniere revision par <strong>{{ item.activity.lastauthor }}</strong> il y a {{ item.activity.lastdate }} 
+				[<a href="{{ item.href }}/changeset/{{ item.activity.lastrev }}">{{ item.activity.lastrev }}</a>].</p>
+				<blockquote><p>{{ item.activity.lastmessage }}</p></blockquote>
+			</div>
+			<div class="clear"></div>
+		</li>
+	{% endfor %}
+	</ul>
+	<p><a href="http://python.org" title="Powered by Python"><img src="media/img/python.png" alt="Python Powered" /></a></p>
+{% endblock %}
+
