@@ -7,13 +7,14 @@ from os import path
 
 class Config:
 	"Contient la configuration"
+	forge_href = "/"
 	trac_href = "/"
-	trac_dir = "/home/etna/trac"
+	trac_dir = ""
 	demo_href = "/demo"
-	demo_dir = "/home/etna/www/demo"
+	demo_dir = ""
 	archives_href = "/archives"
-	archives_dir = "/home/etna/www/archives"
-	template_dir = "/home/etna/www/templates"
+	archives_dir = ""
+	template_dir = "templates/"
 
 class TracProject:
 	"Instance d'un projet trac"
@@ -64,7 +65,8 @@ def view_admin(req, config):
 	req.content_type = 'text/html'
 	t = Template('admin', FileSystemLoader(config.template_dir))
 	c = Context({
-		'users' : [{'name' : 'toto'}]
+		'users' : [{'name' : 'toto'}],
+		'forge_href' : config.forge_href
 	})
 	req.write(t.render(c))
 
@@ -73,7 +75,9 @@ def view_404(req, config):
 	req.content_type = 'text/html'
 	req.status = 404
 	t = Template('404', FileSystemLoader(config.template_dir))
-	c = Context({})
+	c = Context({
+		'forge_href' : config.forge_href
+	})
 	req.write(t.render(c))
 
 def view_index(req, config):
@@ -150,7 +154,8 @@ def view_index(req, config):
 	t = Template('projects', FileSystemLoader(config.template_dir))
 	c = Context({
 		'projects' : projects,
-		'sort' : sort
+		'sort' : sort,
+		'forge_href' : config.forge_href
 	})
 	req.write(t.render(c))
 

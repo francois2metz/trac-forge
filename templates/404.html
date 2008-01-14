@@ -1,14 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
- <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr">
- <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" type="text/css" media="screen" href="media/css/index.css" />
-	<title>Erreur 404</title>
-</head>
-<body>
-	<h1>Erreur 404</h1>
+{% extends "base"  %}
+{% marker "title" set "Erreur 404" %}
+{% marker "h1" set "Erreur 404" %}
+
+{% block "content" %}
 	<p>La page que vous avez demande n'existe pas ou plus.</p>
-	<p>Retour aux <a href="/">projets</a>.</p>
-</body>
-</html>
+	<p>Retour aux <a href="{{ forge_href }}">projets</a>.</p>
+{% endblock %}
