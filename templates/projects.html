@@ -1,12 +1,12 @@
-{% extends "base"  %}
-{% marker "title" set "Projets" %}
-{% marker "h1" set "Projets" %}
+{% extends "base.html"  %}
+{% block title %}Projets{% endblock %}
+{% block h1 %}Projets{% endblock %}
 
-{% block "content" %}
+{% block content %}
 	<p id="tri">Tri: 
-		{% if sort equals "a" %}<strong title="Tri par ordre alphabetique">a..z</strong>{% else %}<a href="a" title="Trier par ordre alphabetique">a..z</a>{% endif  %} | 
-	       	{% if sort equals "z" %}<strong title="Tri par ordre alphabetique inverse">z..a</strong>{% else %}<a href="z" title="Trier par ordre alphabetique inverse">z..a</a>{% endif %} | 
-	       	{% if sort equals "b" %}<strong title="Tri par activite">Activite</strong>{% else %}<a href="." title="Tri par activite dans le projet">Activite</a>{% endif %}
+		{% if sort == "a" %}<strong title="Tri par ordre alphabetique">a..z</strong>{% else %}<a href="a" title="Trier par ordre alphabetique">a..z</a>{% endif  %} | 
+	       	{% if sort == "z" %}<strong title="Tri par ordre alphabetique inverse">z..a</strong>{% else %}<a href="z" title="Trier par ordre alphabetique inverse">z..a</a>{% endif %} | 
+	       	{% if sort == "b" %}<strong title="Tri par activite">Activite</strong>{% else %}<a href="." title="Tri par activite dans le projet">Activite</a>{% endif %}
 	</p>
 	<ul class="projects">
 	{% for item in projects%}
@@ -32,6 +32,7 @@
 		</li>
 	{% endfor %}
 	</ul>
-	<p><a href="http://python.org" title="Powered by Python"><img src="{{ forge_href  }}media/img/python.png" alt="Python Powered" /></a></p>
+	<p><a href="http://python.org" title="Powered by Python"><img src="{{ media_href }}img/python.png" alt="Python Powered" /></a></p>
+  {{ debug }}
 {% endblock %}
 

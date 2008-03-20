@@ -1,12 +1,12 @@
-{% extends "base" %}
-{% marker "title" set "Admin" %}
-{% marker "h1" set "Administration" %}
+{% extends "base.html" %}
+{% block title %}Admin{% endblock %}
+{% block h1 %}Administration{% endblock %}
 
-{% block "htmlhead" %}
-	<link rel="stylesheet" type="text/css" media="screen" href="{{ forge_href  }}media/css/admin.css" />
+{% block htmlhead %}
+	<link rel="stylesheet" type="text/css" media="screen" href="{{ media_href }}css/admin.css" />
 {% endblock %}
 
-{% block "content" %}
+{% block content %}
 	<ul id="main_menu">
 		<li><a href="admin/projects/">Projets</a></li>
 		<li><a href="admin/users/">Utilisateurs</a></li>

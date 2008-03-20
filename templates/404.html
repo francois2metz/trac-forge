@@ -1,8 +1,11 @@
-{% extends "base"  %}
-{% marker "title" set "Erreur 404" %}
-{% marker "h1" set "Erreur 404" %}
+{% extends "base.html"  %}
+{% block title %}Erreur 404{% endblock %}
+{% block h1 %}Erreur 404{% endblock %}
 
-{% block "content" %}
+{% block htmlhead %}
+{% endblock %}
+
+{% block content %}
 	<p>La page que vous avez demande n'existe pas ou plus.</p>
 	<p>Retour aux <a href="{{ forge_href }}">projets</a>.</p>
 {% endblock %}
