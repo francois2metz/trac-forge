@@ -4,9 +4,9 @@
 
 {% block content %}
 	<p id="tri">Tri: 
-		{% if sort == "a" %}<strong title="Tri par ordre alphabetique">a..z</strong>{% else %}<a href="a" title="Trier par ordre alphabetique">a..z</a>{% endif  %} | 
-	       	{% if sort == "z" %}<strong title="Tri par ordre alphabetique inverse">z..a</strong>{% else %}<a href="z" title="Trier par ordre alphabetique inverse">z..a</a>{% endif %} | 
-	       	{% if sort == "b" %}<strong title="Tri par activite">Activite</strong>{% else %}<a href="." title="Tri par activite dans le projet">Activite</a>{% endif %}
+		{% if sort == "a" %}<strong title="Tri par ordre alphabétique">a..z</strong>{% else %}<a href="a" title="Trier par ordre alphabétique">a..z</a>{% endif  %} | 
+	       	{% if sort == "z" %}<strong title="Tri par ordre alphabétique inverse">z..a</strong>{% else %}<a href="z" title="Trier par ordre alphabétique inverse">z..a</a>{% endif %} | 
+	       	{% if sort == "b" %}<strong title="Tri par activité">Activité</strong>{% else %}<a href="." title="Tri par activité dans le projet">Activité</a>{% endif %}
 	</p>
 	<ul class="projects">
 	{% for item in projects%}
@@ -24,7 +24,7 @@
 			        </ul>
 			</div>
 			<div class="details">
-				<p>Derniere revision par <strong>{{ item.activity.lastauthor }}</strong> il y a {{ item.activity.lastdate }} 
+				<p>Dernière révision par <strong>{{ item.activity.lastauthor }}</strong> il y a {{ item.activity.lastdate }} 
 				[<a href="{{ item.href }}/changeset/{{ item.activity.lastrev }}">{{ item.activity.lastrev }}</a>].</p>
 				<blockquote><p>{{ item.activity.lastmessage }}</p></blockquote>
 			</div>

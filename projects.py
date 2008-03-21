@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 from mod_python import apache
 from trac.env import open_environment
 from dircache import listdir
@@ -55,17 +56,18 @@ class TracProjects:
 
 def handler(req):
 	"""traitement de la requete"""
+	req.content_type = 'text/html; charset=utf-8'
 	config = Config()
 	if req.uri == config.forge_href+"/admin":
-		view_admin(req, config)
+		content = view_admin(req, config)
 	elif req.uri == config.forge_href+"/a" or req.uri == config.forge_href+"/z" or req.uri == config.forge_href+"/":
-		view_index(req, config)
+		content = view_index(req, config)
 	else:
-		view_404(req, config)
+		content = view_404(req, config)
+        req.write(content.encode('utf-8'))
 	return apache.OK
 
 def view_admin(req, config):
-	req.content_type = 'text/html'
 	env = Environment(loader=FileSystemLoader(config.template_dir))
 	tmpl = env.get_template("admin.html")
 	context = {
@@ -73,18 +75,18 @@ def view_admin(req, config):
 		'forge_href' : config.forge_href,
 		'media_href' : config.media_href
 	}
-	req.write(tmpl.render(context))
+	return tmpl.render(context)
 
 def view_404(req, config):
 	"""Page d'erreur 404"""
-	req.content_type = 'text/html'
 	req.status = 404
 	env = Environment(loader=FileSystemLoader(config.template_dir))
 	tmpl = env.get_template("404.html")
 	context = {
-		'forge_href' : config.forge_href
+		'forge_href' : config.forge_href,
+		'media_href' : config.media_href
 	}
-	req.write(tmpl.render(context))
+	return tmpl.render(context)
 
 
 def repository_diff_message(lastChange):
@@ -111,7 +113,6 @@ def repository_diff_message(lastChange):
 
 def view_index(req, config):
 	"""Index des projets"""
-	req.content_type = 'text/html'
 	tracProjects = TracProjects(config.trac_dir)
 	projects = []
 	for project in tracProjects:
@@ -190,6 +191,6 @@ def view_index(req, config):
 		'media_href' : config.media_href,
 		'debug' : req.uri
 	}
-	req.write(template.render(context))
+	return template.render(context)
 
 
