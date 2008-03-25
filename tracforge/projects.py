@@ -5,7 +5,7 @@ from dircache import listdir
 from jinja import Environment, FileSystemLoader
 import time
 from os import path
-from config import Config
+from tracforge.config import Config
 
 class TracProject:
 	""""Instance d'un projet trac"""

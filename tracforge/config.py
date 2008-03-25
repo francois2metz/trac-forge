@@ -5,7 +5,7 @@ class Config:
 	root_dir = "/var/www/tracforge"
 	forge_href = "/tracforge"
 	forge_dir = root_dir+"/tracforge"
-	template_dir = forge_dir+"/templates"
+	template_dir = root_dir+"/templates"
 	media_href = "/media/"
 	trac_href = "/trac/"
 	trac_dir = root_dir+"/trac"
