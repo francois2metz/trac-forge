@@ -25,29 +25,26 @@ import os
 import sys
 import time
 
-sys.path.append('../')
 from tracforge.config import Config
 
 class Tracenvadmin:
 
-	def __init__(self):
-		self.db = "sqlite:db/trac.db"
-		self.template = "/usr/share/trac/templates"
-		self.rootpath = Config.root_dir 
-		self.tracpath = Config.trac_dir
-		self.svnpath = self.rootpath+"/svn/"
-		self.svn = "svn"
-	
-	def createenv(self,projectname = None):
-		if not projectname:
-			raise ProjectnameUndefined 
-		os.chdir(self.svnpath)
-		os.system("/usr/bin/svnadmin create "+projectname)
-		os.chdir(self.tracpath)	
-		os.system("/usr/bin/trac-admin "+projectname+" initenv "+projectname+" "+self.db+" "+self.svn+" "+self.svnpath+projectname+" "+self.template)
+    def __init__(self):
+        self.db = "sqlite:db/trac.db"
+        self.template = "/usr/share/trac/templates"
+        self.svn = "svn"
+    
+    def create_env(self, config, projectname = None):
+        os.chdir(config.svn_dir)
+        os.system("/usr/bin/svnadmin create "+projectname)
+        os.chdir(config.trac_dir)    
+        os.system("/usr/bin/trac-admin "+projectname+" initenv "+projectname+" "+self.db+" "+self.svn+" "+config.svn_dir+"/"+projectname+" "+self.template)
 
+    def delete_env(self, config, projectname = None):
+        os.system("/bin/rm -Rf "+config.svn_dir+"/"+projectname)
+        os.system("/bin/rm -Rf "+config.trac_dir+"/"+projectname)
 
 if __name__ == "__main__":
-	env = Tracenvadmin()
-	#env.createenv("test2")
+    env = Tracenvadmin()
+    #env.createenv("test2")
 

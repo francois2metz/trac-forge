@@ -26,6 +26,7 @@ from jinja import Environment, PackageLoader, FileSystemLoader
 import time
 from os import path
 from tracforge.config import Config
+from tracforge.tracenvadmin import Tracenvadmin
 
 class TracProject:
     """"Instance d'un projet trac"""
@@ -66,8 +67,17 @@ def handler(req):
     req.content_type = 'text/html; charset=utf-8'
     configFile = req.get_options()['ForgeConfig']
     config = Config(configFile)
-    if req.uri == config.forge_href+"/admin":
-        content = view_admin(req, config)
+    uri = req.uri.split("/")
+    if len(uri) >= 3 and  uri[2] == "admin":
+        if len(uri) >= 4 and uri[3] == "projects":
+            if len(uri) >= 5 and uri[4] == "create":
+                content = view_admin_projects(req, config, "create", uri[5])
+            elif len(uri) >= 5 and uri[4] == "delete":
+                content = view_admin_projects(req, config, "delete", uri[5])
+            else:
+                content = view_admin(req,config)
+        else:
+            content = view_admin(req, config)
     elif req.uri == config.forge_href+"/a" or req.uri == config.forge_href+"/z" or req.uri == config.forge_href+"/":
         content = view_index(req, config)
     else:
@@ -84,6 +94,20 @@ def load_template(config, templateName):
     return environment.get_template(templateName)
     
 def view_admin(req, config):
+    tmpl = load_template(config, "admin.html")
+    context = {
+        'users' : [{'name' : 'toto'}],
+        'forge_href' : config.forge_href,
+        'media_href' : config.media_href
+    }
+    return tmpl.render(context)
+
+def view_admin_projects(req, config, action, project_name):
+    env_trac = Tracenvadmin()
+    if action == "create":
+    	env_trac.create_env(config, project_name)
+    elif action == "delete":
+    	env_trac.delete_env(config, project_name)
     tmpl = load_template(config, "admin.html")
     context = {
         'users' : [{'name' : 'toto'}],
