@@ -26,7 +26,7 @@ class Config:
     def __init__(self, pathConfigFile):
         configFile = ConfigParser()
         configFile.readfp(open(pathConfigFile))
-        
+
         self.forge_href    = configFile.get('forge', 'href')
         self.template_dir  = configFile.get('templates', 'dir')
         self.media_href    = configFile.get('media', 'href')
@@ -38,3 +38,4 @@ class Config:
         self.trac_href     = configFile.get('trac', 'href')
         self.svn_dir       = configFile.get('svn','dir')
         self.svn_href      = configFile.get('svn','href')
+
