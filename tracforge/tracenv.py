@@ -45,8 +45,8 @@ class TracProject:
         # in crashes if no commit have been done.
         try :
             # last commit information
-            repo                = get_repos()
-            last_action         = repo.get_changeset(repos.youngest_rev)
+            repo                = self.env.get_repository()
+            last_action         = repo.get_changeset(repo.youngest_rev)
             self.last_rev       = repo.youngest_rev
             self.last_author    = last_action.author
             self.last_message   = last_action.message
