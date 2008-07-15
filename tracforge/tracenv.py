@@ -23,6 +23,7 @@ from trac.env import open_environment
 from dircache import listdir
 from os import path as ospath
 from time import time
+import sys
 
 class TracProject:
     """"Project description"""
@@ -52,7 +53,7 @@ class TracProject:
             self.last_message   = last_action.message
             self.last_date      = last_action.date
         except :
-            pass
+            print "Unexpected error:", sys.exc_info()
 
     def get_repos(self):
         return self.env.get_repository()

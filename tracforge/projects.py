@@ -21,7 +21,7 @@
 
 from jinja import Environment, PackageLoader, FileSystemLoader
 from tracforge.tracenvadmin import Tracenvadmin
-from time import time
+from datetime import datetime
 from os import path as ospath
 from tracenv import *
 
@@ -34,26 +34,17 @@ def load_template(config, templateName):
     return environment.get_template(templateName)
 
 def repository_diff_message(last_change_date):
-    date_diff = time() - last_change_date
-    nbYears = date_diff / (60 * 60 * 24 * 30 * 12)
-    if nbYears == 1:
-        message_diff = " plus de " + str(int(nbYears)) + " an"
-    elif nbYears >= 1:
-        message_diff = " plus de " + str(int(nbYears)) + " ans"
-    else:
-        nbMonths = date_diff / (60 * 60 * 24 * 30)
-        if nbMonths > 1:
-            message_diff = str(int(nbMonths)) + " mois"
-        else:
-            nbDays = date_diff / (60 * 60 * 24)
-            if nbDays > 1:
-                message_diff = str(int(nbDays)) + " jours "
-            else:
-                nbHours = date_diff / (60 * 60)
-                if nbHours > 1:
-                    message_diff = "plus de " + str(int(nbHours)) + " heures"
-                else:
-                    message_diff = "moins d'une heure"
+    date_diff = datetime.now() - last_change_date.replace(tzinfo=None)
+    if date_diff.days >= 30 :
+        message_diff = str(int(date_diff.days) / 30) + " mois"
+    elif date_diff.days >= 0 :
+        message_diff = str(int(date_diff.days)) + " jours"
+    elif date_diff.seconds >= (60*60) :
+        message_diff = str(int(date_diff.seconds/ (60*60))) + " heures"
+    elif date_diff.seconds >= (60) :
+        message_diff = str(int(date_diff.seconds/ (60))) + " minutes"
+    elif date_diff.seconds >= 0 :
+        message_diff = str(int(date_diff.seconds)) + " secondes"
     return message_diff
 
 
@@ -114,7 +105,7 @@ def view_index(request, config):
                     'lastauthor' : project.get_last_author(),
                     'lastdate' : date_message,
                     'lastmessage' : project.get_last_message(),
-                    'datediff' : time() - project.get_last_date()
+                    'datediff' : datetime.now() - project.get_last_date().replace(tzinfo=None)
                 },
                 'demo' : {
                     'enable' : demo,
