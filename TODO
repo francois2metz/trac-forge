@@ -1,0 +1,24 @@
+
+TODO LIST
+=========
+
+Handler :
+ * Handler WSGI have to be supported
+ * GET value parser engine
+
+Admin authentification
+ * HTML Template
+ * Authentification
+
+Add / Delete Env :
+ * HTML Template
+ * Controller / Business Logic
+
+Add / Delete User :
+ * HTML Template
+ * Controller / Business Logic / How to store persistent data than can be used by trac ?
+
+
+
+
+
